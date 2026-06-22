@@ -1,5 +1,6 @@
 package v1
 
+
 import metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 
 // For signle struct deepcopy implementation
@@ -27,8 +28,14 @@ type Server struct {
 	Status            ServerStatus `json:"status,omitempty"`
 }
 
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 type ServerList struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	Items             []Server `json:"items"`
+}
+
+// +k8s:deepcopy-gen=false
+type ServerInfo struct {
+	Name string `json:"name"`
 }

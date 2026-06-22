@@ -40,14 +40,25 @@ Delete already present deepcopy file. Then run below command. Here we can provid
     "k8s-deepcopy-gen/api/v1"
 ```
 
-Here the `doc.go` file where we can define package level deepcopy tags like below. Other name on the same package doesn't support this.
-
+**[Global Tags]** Need to add configuration to the `doc.go` file where we can define package level deepcopy tags like below.
 ```go
 // +k8s:deepcopy-gen=package
 ```
 
-We can define struct level generator tag by the below tags:
+**[Local Tags]** We can define struct level deepcopy generator tag by the below tags:
 ```go
 // +k8s:deepcopy-gen=true
 ```
+
+**[Local Tags]** Undo the deepcopy for specific data type
+```go
+// +k8s:deepcopy-gen=false
+```
+
+**[Local Tags]** Making a function which is implement `runtime.Object` interface
+```go
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+```
+
+
 
